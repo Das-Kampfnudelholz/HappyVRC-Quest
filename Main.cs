@@ -35,6 +35,7 @@ using Il2CppSystem;
 using Action = System.Action;
 using Object = UnityEngine.Object;
 using Environment = System.Environment;
+using Il2CppSystem.Security.Cryptography;
 
 
 //IMPORTANT NOTE!!!! YOU NEED TO RENAME THE ENTIRE ReButtonAPI NAMESPACE 
@@ -64,6 +65,7 @@ namespace ReButtonAPI
             public static ReMirroredWingMenu WingMenu;
             public static ReMirroredWingButton _WingButton;
             public static ReMirroredWingToggle _WingToggle;
+
         private GameObject loadScreenPrefab;
         private static AudioClip _clip;
         private static readonly MelonPreferences_Category Cla =
@@ -180,7 +182,7 @@ namespace ReButtonAPI
 
                 _uiManager = new UiManager("HappyVRC", CyResources.Resources.TEMPIcon);
 
-
+            VRCPlayer.field_Internal_Static_VRCPlayer_0.gameObject.GetComponent<VRCPlayer>()._player.Method_Internal_get_APIUser_PDM_0().id.
                 //---------------------Movement---------------------------------
                 _uiManager.MainMenu.AddMenuPage("Movement", "Movement", null);
                 var dMovement = _uiManager.MainMenu.GetMenuPage("Movement");
@@ -236,8 +238,11 @@ namespace ReButtonAPI
                 }
                 _uiManager.MainMenu.AddMenuPage("Cheats", "Cheats", null);
                 var dCheat = _uiManager.MainMenu.GetMenuPage("Cheats");
-                _testspace = dCheat.AddSpacer(null);
-                _menuButton1 = dCheat.AddButton("Make Murder", "Make Murder ", () =>
+                 _menuButton1 = dCheat.AddButton("God Mode", "God Mode ", () =>
+                {
+
+                  }, null);
+            _menuButton1 = dCheat.AddButton("Make Murder", "Make Murder ", () =>
                 {
                     Role(APIUser.CurrentUser.displayName, "SyncAssignM");
                 }, null);
@@ -261,17 +266,35 @@ namespace ReButtonAPI
                 }, null);
 
                 _testspace = dCheat.AddSpacer(null);
-
-                _menuButton1 = dCheat.AddButton("Release Snake", "Release Snake", delegate
+                _testspace = dCheat.AddSpacer(null);
+                 _menuButton1 = dCheat.AddButton("Release Snake", "Release Snake", delegate
                 {
                     GameObject.Find("/Game Logic").transform.Find("Snakes/SnakeDispenser").GetComponent<UdonBehaviour>().SendCustomNetworkEvent(0, "DispenseSnake");
                 }, null);
 
 
-                //---------------------Cheatos---------------------------------
+            //---------------------Cheatos---------------------------------
 
 
-                if (APIUser.CurrentUser.id.Contains("usr_a07dad30-bd86-47c9-b787-6e6fb124c72c"))
+            //---------------------Movement---------------------------------
+            _uiManager.MainMenu.AddMenuPage("Lovense Connect", "Connect your Lovense toy", null);
+            var dERP = _uiManager.MainMenu.GetMenuPage("Lovense");
+            _testspace = dERP.AddSpacer(null);
+            _menuButton1 = dERP.AddButton("Lovense", "Lovense", () =>
+            {
+                Networking.LocalPlayer.SetJumpImpulse(3);
+            }, null);
+            _menuButton1 = dERP.AddButton("High Jump", "High jump ", () =>
+            {
+                Networking.LocalPlayer.SetJumpImpulse(5);
+                VRC.Player.prop_Player_0.gameObject.GetComponent<CharacterController>().enabled = true;
+            }, null);
+            //---------------------Movement---------------------------------
+
+
+
+
+            if (APIUser.CurrentUser.id.Contains("usr_a07dad30-bd86-47c9-b787-6e6fb124c72c"))
                 {
 
                     _uiManager.MainMenu.AddMenuPage("UwU", "UwU", null);
